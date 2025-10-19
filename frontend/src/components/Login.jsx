@@ -8,7 +8,7 @@ const Login = ({ onLogin, switchToSignup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const res = await axios.post('https://nested-comment-app.onrender.com/users/login', { email, password });
       onLogin(res.data.user, res.data.token);
     } catch (error) {
       alert(error.response?.data?.message || 'Login failed');

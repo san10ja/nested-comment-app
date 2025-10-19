@@ -10,7 +10,7 @@ const Home = ({ user, onLogout }) => {
 // Fetches all comments from the backend API.
   const fetchComments = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/comments");
+      const res = await axios.get("https://nested-comment-app.onrender.com/api/comments");
       setComments(res.data);
     } catch (err) { console.error("Error fetching comments:", err); }
   };
@@ -21,7 +21,7 @@ const Home = ({ user, onLogout }) => {
   const handleAddComment = async (text, parentId = null) => {
     if (!user) return alert("You must be logged in to comment.");
     try {
-      await axios.post("http://localhost:5000/api/comments", 
+      await axios.post("https://nested-comment-app.onrender.com/api/comments", 
         { text, parentId, userId: user._id, username: user.username, avatar: user.avatar },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -33,7 +33,7 @@ const Home = ({ user, onLogout }) => {
   const handleDeleteComment = async (commentId) => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/comments/${commentId}`, {
+        await axios.delete(`https://nested-comment-app.onrender.com/api/comments/${commentId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchComments();// Re-fetch comments 
@@ -49,7 +49,7 @@ const Home = ({ user, onLogout }) => {
     }
     
     try {
-      await axios.patch(`http://localhost:5000/api/comments/${commentId}/upvote`, {}, {
+      await axios.patch(`https://nested-comment-app.onrender.com/api/comments/${commentId}/upvote`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchComments(); 
