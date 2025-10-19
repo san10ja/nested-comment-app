@@ -1,53 +1,50 @@
-# --- Build Settings ---
-# This section tells Netlify how to build your site.
+# This is the master configuration file for your Netlify deployment.
 
 [build]
-  # Publish directory: This is the folder that contains the final website after the build.
+  # This is the folder that Netlify will make public after a successful build.
   publish = "build"
 
-  # Build command: This is the robust, explicit command we will use.
-  # 1. Installs frontend dependencies
-  # 2. Installs backend dependencies
-  # 3. Builds the React app with CI=false to ignore warnings
+  # This is the explicit, step-by-step command Netlify will run.
+  # 1. Installs frontend dependencies.
+  # 2. Installs backend dependencies.
+  # 3. Builds the React app, treating warnings as non-fatal.
   command = "npm install && npm install --prefix backend && CI=false npm run build"
 
-# --- Environment ---
-# This section ensures consistency between your machine and Netlify's servers.
 [build.environment]
-  # This is a crucial step: It forces Netlify to use a specific, stable version of Node.js.
-  # This prevents version mismatch errors, which are a common cause of build failures.
+  # This forces Netlify to use a stable version of Node.js, preventing many common errors.
   NODE_VERSION = "18"
 ```
 
 ---
 
-### **Step 3: Reset Your Netlify UI Settings**
+### **Step 2: Double-Check Your Netlify UI Settings**
 
-To avoid any conflicts, we should tell Netlify to use the configuration from your new file instead of the UI.
+Now, let's make sure the settings on the Netlify website are not overriding your new file.
 
 1.  Go to your site's dashboard on Netlify.
-2.  Go to **"Site settings"** -> **"Build & deploy"**.
-3.  Scroll down to **"Build settings"** and click **"Edit settings"**.
-4.  **Clear out the "Build command" field** and leave it blank.
-5.  Ensure the **"Publish directory"** is set to `build` or is also blank (the `.toml` file will take precedence).
-6.  Save the changes.
+2.  Navigate to **"Site settings"** -> **"Build & deploy"**.
+3.  Scroll to **"Build settings"** and click **"Edit settings"**.
+4.  Confirm that the **"Build command"** field is **completely empty**.
+5.  Confirm that the **"Publish directory"** field is either empty or set to `build`.
+6.  Click **"Save"**.
 
 
 
 ---
 
-### **Step 4: Commit and Push the New File**
+### **Step 3: Commit and Push the Final Change**
 
-Now, you need to upload your new configuration file to your GitHub repository. This will trigger the final, successful build.
+Finally, upload the corrected `netlify.toml` file to your GitHub repository. This will trigger the new, successful build.
 
 1.  In your terminal, run the following commands:
     ```sh
     git add netlify.toml
     ```
-2.  Commit the change:
+2.  Commit the change with a clear message:
     ```sh
-    git commit -m "feat: Add netlify.toml for robust deployment configuration"
+    git commit -m "fix: Finalize and verify netlify.toml configuration"
     ```
 3.  Push to GitHub:
     ```sh
     git push
+    
