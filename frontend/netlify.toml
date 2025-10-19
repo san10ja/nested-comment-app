@@ -1,10 +1,14 @@
 # This is the master configuration file for your Netlify deployment.
 
 [build]
-  # This is the folder that Netlify will make public after a successful build.
+  # Base directory: Explicitly tells Netlify to run all commands from the root of the repository.
+  # This is a crucial setting for monorepos.
+  base = "."
+
+  # Publish directory: This is the folder that Netlify will make public after a successful build.
   publish = "build"
 
-  # This is the explicit, step-by-step command Netlify will run.
+  # Build command: This is the explicit, step-by-step command Netlify will run.
   # 1. Installs frontend dependencies.
   # 2. Installs backend dependencies.
   # 3. Builds the React app, treating warnings as non-fatal.
@@ -13,38 +17,3 @@
 [build.environment]
   # This forces Netlify to use a stable version of Node.js, preventing many common errors.
   NODE_VERSION = "18"
-```
-
----
-
-### **Step 2: Double-Check Your Netlify UI Settings**
-
-Now, let's make sure the settings on the Netlify website are not overriding your new file.
-
-1.  Go to your site's dashboard on Netlify.
-2.  Navigate to **"Site settings"** -> **"Build & deploy"**.
-3.  Scroll to **"Build settings"** and click **"Edit settings"**.
-4.  Confirm that the **"Build command"** field is **completely empty**.
-5.  Confirm that the **"Publish directory"** field is either empty or set to `build`.
-6.  Click **"Save"**.
-
-
-
----
-
-### **Step 3: Commit and Push the Final Change**
-
-Finally, upload the corrected `netlify.toml` file to your GitHub repository. This will trigger the new, successful build.
-
-1.  In your terminal, run the following commands:
-    ```sh
-    git add netlify.toml
-    ```
-2.  Commit the change with a clear message:
-    ```sh
-    git commit -m "fix: Finalize and verify netlify.toml configuration"
-    ```
-3.  Push to GitHub:
-    ```sh
-    git push
-    
