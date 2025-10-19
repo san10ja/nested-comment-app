@@ -17,3 +17,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+[build]
+  base = "."
+  publish = "build"
+  command = "npm install && npm install --prefix backend && CI=false npm run build"
