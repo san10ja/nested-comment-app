@@ -1,23 +1,51 @@
 # This is the master configuration file for your Netlify deployment.
-# This version uses an explicit production context to ensure it is not ignored.
 
-# --- Base Build Settings (applies to all deploys) ---
 [build]
-  # This is the folder that Netlify will make public after a successful build.
+  # Base directory: Tells Netlify to run commands from the root of the repository.
+  base = "."
+
+  # Publish directory: The folder that contains the final website after the build.
   publish = "build"
-  # This command is a fallback, but the production context will take precedence.
+
+  # Build command: The explicit, step-by-step command Netlify will run.
   command = "npm install && npm install --prefix backend && CI=false npm run build"
 
-# --- Production Context ---
-# These settings are applied specifically when deploying your main branch.
-# This is a more robust way to configure builds and often solves detection issues.
-[context.production]
-  command = "npm install && npm install --prefix backend && CI=false npm run build"
-  
-  [context.production.environment]
-    # This forces Netlify to use a stable version of Node.js for production builds.
-    NODE_VERSION = "18"
+[build.environment]
+  # Forces Netlify to use a stable version of Node.js.
+  NODE_VERSION = "18"
 
-# You can also add other contexts, like for deploy previews
-# [context.deploy-preview]
-#   command = "echo 'Building a preview...'"
+# --- NEW: Add this redirects rule at the end of the file ---
+# This rule tells Netlify how to handle SPA routing.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+
+**What this new section does:**
+* `[[redirects]]`: Declares a new redirect rule.
+* `from = "/*"`: This means "for any URL path that is requested..."
+* `to = "/index.html"`: "...serve the main `index.html` file instead."
+* `status = 200`: This tells the browser that the request was successful (an "OK" status).
+
+
+
+---
+
+### **Step 2: Commit and Push This Final Change**
+
+Now, you need to upload the updated configuration file to your GitHub repository. This will trigger the final build that fixes the routing.
+
+1.  In your terminal, run the following commands from your project's root directory:
+    ```sh
+    git add netlify.toml
+    ```
+
+2.  Commit the change with a clear message:
+    ```sh
+    git commit -m "feat: Add SPA redirect rule to netlify.toml"
+    ```
+
+3.  Push to GitHub:
+    ```sh
+    git push
