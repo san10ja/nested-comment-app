@@ -1,19 +1,23 @@
 # This is the master configuration file for your Netlify deployment.
+# This version uses an explicit production context to ensure it is not ignored.
 
+# --- Base Build Settings (applies to all deploys) ---
 [build]
-  # Base directory: Explicitly tells Netlify to run all commands from the root of the repository.
-  # This is a crucial setting for monorepos.
-  base = "."
-
-  # Publish directory: This is the folder that Netlify will make public after a successful build.
+  # This is the folder that Netlify will make public after a successful build.
   publish = "build"
-
-  # Build command: This is the explicit, step-by-step command Netlify will run.
-  # 1. Installs frontend dependencies.
-  # 2. Installs backend dependencies.
-  # 3. Builds the React app, treating warnings as non-fatal.
+  # This command is a fallback, but the production context will take precedence.
   command = "npm install && npm install --prefix backend && CI=false npm run build"
 
-[build.environment]
-  # This forces Netlify to use a stable version of Node.js, preventing many common errors.
-  NODE_VERSION = "18"
+# --- Production Context ---
+# These settings are applied specifically when deploying your main branch.
+# This is a more robust way to configure builds and often solves detection issues.
+[context.production]
+  command = "npm install && npm install --prefix backend && CI=false npm run build"
+  
+  [context.production.environment]
+    # This forces Netlify to use a stable version of Node.js for production builds.
+    NODE_VERSION = "18"
+
+# You can also add other contexts, like for deploy previews
+# [context.deploy-preview]
+#   command = "echo 'Building a preview...'"
