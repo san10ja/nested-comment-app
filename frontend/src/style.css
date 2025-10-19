@@ -1,0 +1,258 @@
+/* --- 1. General Page Styles --- */
+body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  font-family: "Poppins", Arial, sans-serif;
+  margin: 0;
+}
+
+.comment-thread {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* --- 2. Parent (Top-Level) Comment Styling --- */
+.comment-container.top-level {
+  background-color: #282828;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border-left: none;
+}
+
+.comment-container.top-level .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+/* --- 3. Child Comment (Reply) Styling --- */
+.comment-container {
+  display: flex;
+  position: relative;
+  padding-left: 55px; /* Indents replies */
+  margin-top: 1.5rem;
+}
+
+/* Vertical thread line for replies */
+.comment-container::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #444;
+}
+
+.comment-container.top-level::before {
+  display: none;
+}
+
+/* --- 4. General Comment Elements --- */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  left: 5px;
+  top: 15px;
+}
+
+.comment-container.top-level .avatar {
+  position: static;
+}
+
+.comment-content {
+  width: 100%;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.comment-username {
+  font-weight: bold;
+  color: #fff;
+}
+
+.comment-timestamp {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.comment-text {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.comment-actions button {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-right: 1rem;
+}
+
+.comment-actions button:hover {
+  color: #fff;
+}
+
+/* --- 5. Comment Form Styling --- */
+.comment-form {
+  margin-top: 1rem;
+}
+
+/* Main comment form textarea */
+.comment-thread > .comment-form .comment-textarea {
+  min-height: 80px;
+  font-size: 1rem;
+}
+
+/* Reply form positioning and connecting line */
+.comment-container .comment-form {
+  position: relative;
+  padding-left: 37px;
+}
+
+.comment-container .comment-form::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 18px;
+  height: 2px;
+  width: 25px;
+  background-color: #444;
+}
+
+/* Shared textarea and button styles */
+.comment-textarea {
+  width: 100%;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 0.75rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.post-reply-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  float: right;
+}
+.upvote-btn.upvoted {
+  color: #007bff; /* Highlight color for an upvoted button */
+  font-weight: bold;
+}
+.post-thread img{
+  place-self: center;
+  height:auto;
+  width:100%;
+  
+}
+.btn_log_out{
+  position:relative;
+  margin-top: 25px;
+}
+.Header_out{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* --- Main Login Container --- */
+.login-container {
+  max-width: 400px; /* Prevents the form from being too wide on desktops */
+  margin: 4rem auto; /* Centers the form vertically and horizontally */
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* --- Form Header --- */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* --- Form Element Layout --- */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Creates space between form elements */
+}
+
+/* --- Input Fields --- */
+.login-container input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't affect the width */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* --- Input Field Focus State --- */
+.login-container input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Primary Submit Button --- */
+.login-container button[type='submit'] {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-container button[type='submit']:hover {
+  background-color: #0056b3;
+}
+
+/* --- Bottom Text and Link Button --- */
+.login-container p {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  vertical-align: baseline; /* Aligns it nicely with the surrounding text */
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
